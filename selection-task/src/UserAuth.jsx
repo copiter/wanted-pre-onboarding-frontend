@@ -83,7 +83,7 @@ function UserAuth() {
   return (
     <Container>
       <div>
-        <label for="email">이메일</label>
+        <label htmlfor="email">이메일</label>
         <input
           name="email"
           onChange={handleEmail}
@@ -91,7 +91,7 @@ function UserAuth() {
         />
       </div>
       <div>
-        <label for="password">비밀번호</label>
+        <label htmlfor="password">비밀번호</label>
         <input
           name="password"
           type="password"
@@ -99,7 +99,11 @@ function UserAuth() {
           value={password}
         />
       </div>
-      {disabled ? <div style={{color: "red"}}>이메일에는 @가 들어가고, 비밀번호는 8자 이상입니다</div> : null}
+      {disabled ? (
+        <div style={{ color: "red" }}>
+          이메일에는 @가 들어가고, 비밀번호는 8자 이상입니다
+        </div>
+      ) : null}
       <button
         type="button"
         disabled={disabled}
