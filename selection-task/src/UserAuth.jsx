@@ -53,7 +53,7 @@ function UserAuth() {
       email: email,
       password: password,
     };
-    console.log(data);
+    // console.log(data);
 
     // fetch
     fetch(isSignin ? api.signin() : api.signup(), {
@@ -82,6 +82,7 @@ function UserAuth() {
 
   return (
     <Container>
+      <h2>프리온보딩 사전과제</h2>
       <div>
         <label htmlfor="email">이메일</label>
         <input

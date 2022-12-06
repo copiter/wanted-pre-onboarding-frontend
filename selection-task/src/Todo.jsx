@@ -41,8 +41,7 @@ function Todo() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setTodos(data);
+        setTodos([...data]);
       });
   }, []);
 
@@ -80,14 +79,14 @@ function Todo() {
 
   function handleDeleteTodo(serverId, arrayId) {
     setIsUpdate(false);
-    
+
     fetch(api.deleteTodo(serverId), {
       method: "DELETE",
       headers: {
         Authorization: AUTHORIZATION,
       },
     }).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.status === 204) {
         setTodos(todos.filter((item, idx) => idx !== arrayId));
         alert("삭제 되었습니다")
