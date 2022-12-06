@@ -84,7 +84,7 @@ function UserAuth() {
     <Container>
       <h2>프리온보딩 사전과제</h2>
       <div>
-        <label htmlfor="email">이메일</label>
+        <label htmlFor="email">이메일</label>
         <input
           name="email"
           onChange={handleEmail}
@@ -92,7 +92,7 @@ function UserAuth() {
         />
       </div>
       <div>
-        <label htmlfor="password">비밀번호</label>
+        <label htmlFor="password">비밀번호</label>
         <input
           name="password"
           type="password"

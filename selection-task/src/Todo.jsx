@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import api from './api';
 
-const AUTHORIZATION = `Bearer ${localStorage.getItem("access_token")}`;
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +23,8 @@ const Todoitem = styled.span`
 `;
 
 function Todo() {
+  const AUTHORIZATION = `Bearer ${localStorage.getItem("access_token")}`;
+  
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -41,7 +42,8 @@ function Todo() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setTodos([...data]);
+        console.log(data);
+        setTodos(data);
       });
   }, []);
 
@@ -73,6 +75,7 @@ function Todo() {
       })
       .then((data) => {
         setTodos([...todos, data]);
+        console.log(todos)
         setInputValue('');
       });
   }
@@ -127,7 +130,7 @@ function Todo() {
   return (
     <Container>
       <div>
-        <label htmlfor="create">추가</label>
+        <label htmlFor="create">추가</label>
         <input
           type="text"
           name="create"
@@ -142,53 +145,61 @@ function Todo() {
         </button>
       </div>
       <ol>
-        {todos.map((item, idx) => (
-          <li key={idx}>
-            <input
-              type="checkbox"
-              checked={item.isCompleted}
-              onChange={(e) =>
-                handleUpdateTodo(item.id, idx, e.target.checked)
-              }
-            />
-            <Completed>{item.isCompleted ? "완료" : "미완"}</Completed>
-            {isUpdate && idx === updateIdx ? (
-              <>
-                <input
-                  type="text"
-                  name="create"
-                  value={updateValue}
-                  onChange={(e) => handleUpdateValue(e, item.id)}
-                />
-                <button
-                  onClick={() =>
-                    handleUpdateTodo(item.id, idx, item.isCompleted)
-                  }
-                >
-                  제출
-                </button>
-                <button onClick={() => setIsUpdate(false)}>수정취소</button>
-              </>
-            ) : (
-              <>
-                <Todoitem>{item.todo}</Todoitem>
-                <button
-                  onClick={() => {
-                    setUpdateIdx(idx);
-                    setIsUpdate(true);
-                  }}
-                >
-                  수정
-                </button>
-                <button onClick={() => handleDeleteTodo(item.id, idx)}>
-                  삭제
-                </button>
-              </>
-            )}
-          </li>
-        ))}
+        {todos.length > 0 &&
+          todos.map((item, idx) => (
+            <li key={idx}>
+              <input
+                type="checkbox"
+                checked={item.isCompleted}
+                onChange={(e) =>
+                  handleUpdateTodo(item.id, idx, e.target.checked)
+                }
+              />
+              <Completed>{item.isCompleted ? "완료" : "미완"}</Completed>
+              {isUpdate && idx === updateIdx ? (
+                <>
+                  <input
+                    type="text"
+                    name="create"
+                    value={updateValue}
+                    onChange={(e) => handleUpdateValue(e, item.id)}
+                  />
+                  <button
+                    onClick={() =>
+                      handleUpdateTodo(item.id, idx, item.isCompleted)
+                    }
+                  >
+                    제출
+                  </button>
+                  <button onClick={() => setIsUpdate(false)}>수정취소</button>
+                </>
+              ) : (
+                <>
+                  <Todoitem>{item.todo}</Todoitem>
+                  <button
+                    onClick={() => {
+                      setUpdateIdx(idx);
+                      setIsUpdate(true);
+                    }}
+                  >
+                    수정
+                  </button>
+                  <button onClick={() => handleDeleteTodo(item.id, idx)}>
+                    삭제
+                  </button>
+                </>
+              )}
+            </li>
+          ))}
       </ol>
-      <button onClick={() => { localStorage.removeItem('access_token'); navigate('/') }}>로그아웃</button>
+      <button
+        onClick={() => {
+          localStorage.removeItem("access_token");
+          navigate("/");
+        }}
+      >
+        로그아웃
+      </button>
     </Container>
   );
 }
