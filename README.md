@@ -8,4 +8,4 @@ npm start
 ```
 
 ## 데모영상
-https://youtu.be/rbsMA3sOMao
+https://youtu.be/X0hoRod_zVk
