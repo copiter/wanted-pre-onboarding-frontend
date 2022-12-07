@@ -9,7 +9,7 @@ npm start
 
 ## 사용한 추가 라이브러리
 * Styled Components : 5.3.6
-* react router dom : 6.4.4
+* React Router : 6.4.4
 
 ## 데모영상
 https://youtu.be/X0hoRod_zVk
